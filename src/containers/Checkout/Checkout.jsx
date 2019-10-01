@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { Route } from "react-router-dom";
 
+import { connect } from "react-redux"
+
 import styles from "./Checkout.module.css";
 import CheckoutSummary from "../../components/Order/CheckoutSummary";
 import Spinner from "../../components/Ui/Spinner/Spinner";
@@ -11,17 +13,16 @@ import ContactData from "./ContactData/ContactData";
 
 export class Checkout extends Component {
   state = {
-    ingredients: null,
-    totalPrice : null ,
+   
     load: false
   };
 
   componentDidMount() {
-    console.log("jebem ti mater" , this.props.location.state);
+    
     
     this.setState({
-      ingredients: query.parse(this.props.location.search),
-      totalPrice : this.props.location.state ,
+      // ingredients: query.parse(this.props.location.search),
+      // totalPrice : this.props.location.state ,
       load: true
     });
   }
@@ -43,11 +44,11 @@ export class Checkout extends Component {
           <CheckoutSummary
             cancelOrder={this.handleCheckoutCancel}
             continueOrder={this.handleCheckoutContinue}
-            ingredients={this.state.ingredients}
+            ingredients={this.props.ing}
           />
           <Route
             path={this.props.match.path + "/contact-data"}
-            render={(props) => <ContactData {...props} totalPrice={this.state.totalPrice} ingredients={this.state.ingredients} />}
+            component={ContactData}
           />
         </>
       );
@@ -64,4 +65,11 @@ export class Checkout extends Component {
   }
 }
 
-export default Checkout;
+const mapStateToProps = state => {
+  return {
+    ing : state.ingredients,
+    tprice : state.totalPrice
+  }
+}
+
+export default  connect(mapStateToProps)(Checkout);

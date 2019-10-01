@@ -52,28 +52,28 @@ export class BurgerBuilder extends Component {
   };
 
   handleContinueOrder = () => {
-    /////// deo koda koji je obrisan sa queryParams je bitan ako hocemo da imamo u url tacno varijable od kojih je sastavljeno nesto na drugoj strnici.
+    ///////===== deo koda koji je obrisan sa queryParams je bitan ako hocemo da imamo u url tacno varijable od kojih je sastavljeno nesto na drugoj strnici.
 
-    const queryParams = [] ;
-    ///// pravimo prihvatljiv string da bi mogli kroz URL da ga posaljemo u komponentu kojoj te info trebaju a koja se renderuje iz odgovarajuceg Routa 
-    for (const i in this.props.ing) {
-        queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.props.ing[i]) ) 
-    }
+    // const queryParams = [] ;
+    /////===== pravimo prihvatljiv string da bi mogli kroz URL da ga posaljemo u komponentu kojoj te info trebaju a koja se renderuje iz odgovarajuceg Routa 
+    // for (const i in this.props.ing) {
+    //     queryParams.push(encodeURIComponent(i) + "=" + encodeURIComponent(this.props.ing[i]) ) 
+    // }
     
-    //// ["bacon=1", "cheese=1", "meat=0", "salad=0"]
-    console.log(queryParams); 
+    ////==== ["bacon=1", "cheese=1", "meat=0", "salad=0"]
+    // console.log(queryParams); 
     
-    //// da bi ga dodali u adresu to jest moramo ovakav arej da spojimo sa & !! 
-     const queryString = queryParams.join("&") ;
+    ////===== da bi ga dodali u adresu to jest moramo ovakav arej da spojimo sa & !! 
+    //  const queryString = queryParams.join("&") ;
       
       
 
     this.props.history.replace({
       pathname : "/checkout" ,
-      search : "?" + queryString ,
-      state: { totalPrice: this.state.totalPrice }
+      // search : "?" + queryString ,
+      // state: { totalPrice: this.state.totalPrice }
     }) ;
-    /////// /checkout?bacon=1&cheese=1&meat=0&salad=0
+    //////// ===== checkout?bacon=1&cheese=1&meat=0&salad=0
   };
 
   updateOrderBtnState = ingredientsPreSetState => {
